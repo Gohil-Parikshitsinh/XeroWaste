@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mx-auto py-12 px-6">
+    <!-- Header Section -->
+    <div class="text-center">
+        <h1 class="text-5xl font-extrabold text-gray-800">XeroWaste - Smart Waste & Inventory Management</h1>
+        <p class="mt-4 text-lg text-gray-600">Optimize your waste management process efficiently with real-time tracking.</p>
+        <a href="{{ url_for('register') }}" class="mt-6 inline-block bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-green-700">Get Started</a>
+    </div>
+
+    <!-- Features Section -->
+    <div class="mt-16">
+        <h2 class="text-3xl font-bold text-gray-800 text-center">Why Choose XeroWaste?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+            <!-- Feature 1 -->
+            <div class="bg-white p-6 shadow-md rounded-lg">
+                <h3 class="text-xl font-semibold text-gray-800">Inventory Tracking</h3>
+                <p class="text-gray-600 mt-2">Monitor and manage recyclable materials efficiently.</p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="bg-white p-6 shadow-md rounded-lg">
+                <h3 class="text-xl font-semibold text-gray-800">Automated Reports</h3>
+                <p class="text-gray-600 mt-2">Get detailed insights into waste collected and processed.</p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="bg-white p-6 shadow-md rounded-lg">
+                <h3 class="text-xl font-semibold text-gray-800">Real-time Tracking</h3>
+                <p class="text-gray-600 mt-2">Keep track of waste collection, processing, and disposal in real-time.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="mt-16 text-center">
+        <h2 class="text-3xl font-bold text-gray-800">How It Works</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
+            <div class="p-4">
+                <span class="text-green-600 text-4xl">📋</span>
+                <h3 class="text-lg font-semibold text-gray-800">Register</h3>
+                <p class="text-gray-600">Sign up to start tracking waste efficiently.</p>
+            </div>
+            <div class="p-4">
+                <span class="text-green-600 text-4xl">🗑️</span>
+                <h3 class="text-lg font-semibold text-gray-800">Collect & Track</h3>
+                <p class="text-gray-600">Log waste collection data in real-time.</p>
+            </div>
+            <div class="p-4">
+                <span class="text-green-600 text-4xl">♻️</span>
+                <h3 class="text-lg font-semibold text-gray-800">Process</h3>
+                <p class="text-gray-600">Manage inventory and processing workflows.</p>
+            </div>
+            <div class="p-4">
+                <span class="text-green-600 text-4xl">📊</span>
+                <h3 class="text-lg font-semibold text-gray-800">Generate Reports</h3>
+                <p class="text-gray-600">Analyze data and optimize waste management.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="mt-12 text-center">
+        <a href="{{ url_for('register') }}" class="bg-green-600 text-white px-8 py-3 rounded-lg text-lg font-semibold shadow-md hover:bg-green-700">Start Using XeroWaste</a>
+    </div>
+</div>
+{% endblock %}

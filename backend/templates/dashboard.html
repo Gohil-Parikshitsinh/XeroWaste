@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | XeroWaste</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<script>
+    window.onload = function() {
+        if (!sessionStorage.getItem("loggedIn")) {
+            window.location.href = "{{ url_for('login') }}";
+        }
+    };
+  
+    window.onpageshow = function(event) {
+        if (event.persisted) {
+            sessionStorage.removeItem("loggedIn");
+            window.location.href = "{{ url_for('login') }}";
+        }
+    };
+  </script>
+  
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-800 text-white flex flex-col p-4">
+            <h2 class="text-2xl font-bold mb-6">XeroWaste</h2>
+            <nav>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Dashboard</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Profile</a>
+                <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded">Settings</a>
+                <a href="{{ url_for('logout') }}" class="block py-2 px-4 text-red-400 hover:bg-gray-700 rounded">Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <!-- Navbar -->
+            <header class="bg-white shadow p-4 flex justify-between items-center">
+                <h1 class="text-xl font-semibold">Dashboard</h1>
+                <span>Welcome, {{ user.username }}</span>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="p-6">
+                <div class="bg-white p-6 shadow rounded-lg">
+                    <h2 class="text-lg font-semibold mb-4">Dashboard Overview</h2>
+                    <p class="text-gray-600">This is where your dashboard content goes...</p>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
