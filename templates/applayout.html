@@ -5,23 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}XeroWaste - Dashboard{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("-translate-x-full");
+        }
+    </script>
 </head>
 <body class="bg-gray-100">
 
+    <!-- ✅ Responsive Sidebar Layout -->
     <div class="flex h-screen">
-        <!-- ✅ Sidebar Navigation -->
-        <div class="w-64 bg-blue-900 text-white p-5">
-            <h1 class="text-2xl font-bold mb-5">XeroWaste</h1>
+        <!-- ✅ Sidebar Navigation (Hidden on Mobile) -->
+        <div id="sidebar" class="w-64 bg-blue-900 text-white p-5 fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+            <h1 class="text-2xl font-bold mb-5 text-center">XeroWaste</h1>
             <ul>
-                <li class="mb-3"><a href="/dashboard" class="hover:text-gray-300">Dashboard</a></li>
-                <li class="mb-3"><a href="/inventory" class="hover:text-gray-300">Inventory</a></li>
-                <li class="mb-3"><a href="/waste-tracking" class="hover:text-gray-300">Waste Management</a></li>
-                <li class="mb-3"><a href="/reports" class="hover:text-gray-300">Reports</a></li>
+                <li class="mb-3">
+                    <a href="/dashboard" class="block py-2 px-4 rounded-lg hover:bg-blue-700">Dashboard</a>
+                </li>
+                <li class="mb-3">
+                    <a href="/inventory" class="block py-2 px-4 rounded-lg hover:bg-blue-700">Inventory</a>
+                </li>
+                <li class="mb-3">
+                    <a href="/waste-tracking" class="block py-2 px-4 rounded-lg hover:bg-blue-700">Waste Management</a>
+                </li>
+                <li class="mb-3">
+                    <a href="/waste-analysis" class="block py-2 px-4 rounded-lg hover:bg-blue-700">Waste Analysis</a>
+                </li>
+                <li class="mb-3">
+                    <a href="/reports" class="block py-2 px-4 rounded-lg hover:bg-blue-700">Reports</a>
+                </li>
             </ul>
         </div>
 
         <!-- ✅ Main Content Area -->
-        <div class="flex-1 p-6">
+        <div class="flex-1 p-6 ml-0 md:ml-64 transition-all duration-300">
+            <!-- 🔥 Mobile Sidebar Toggle Button -->
+            <button onclick="toggleSidebar()" class="md:hidden p-3 bg-blue-900 text-white rounded-lg shadow-md mb-4">
+                ☰ Menu
+            </button>
+
             {% block content %}{% endblock %}
         </div>
     </div>
