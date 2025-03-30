@@ -1,0 +1,74 @@
+{% extends "applayout.html" %}
+{% block title %}Add Waste Entry | XeroWaste{% endblock %}
+{% block content %}
+
+<div class="max-w-3xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg">
+  <!-- Page Title -->
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">Add Waste Entry</h2>
+
+  <!-- Waste Entry Form -->
+  <form method="POST" action="/add-waste" class="space-y-4">
+    <!-- Waste Type -->
+    <div>
+      <label for="waste_type" class="block text-gray-700 font-medium">Waste Type</label>
+      <select id="waste_type" name="waste_type" required class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-300">
+        <option value="">-- Select Waste Type --</option>
+        <option value="Plastic">Plastic</option>
+        <option value="Organic">Organic</option>
+        <option value="Metal">Metal</option>
+        <option value="Paper">Paper</option>
+        <option value="Glass">Glass</option>
+      </select>
+    </div>
+
+    <!-- Quantity -->
+    <div>
+      <label for="quantity" class="block text-gray-700 font-medium">Quantity</label>
+      <input type="number" id="quantity" name="quantity" required class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-300" placeholder="Enter quantity">
+    </div>
+
+    <!-- Unit -->
+    <div>
+      <label for="unit" class="block text-gray-700 font-medium">Unit</label>
+      <select id="unit" name="unit" required class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-300">
+        <option value="kg">Kilograms (kg)</option>
+        <option value="g">Grams (g)</option>
+        <option value="ton">Tons</option>
+        <option value="ltr">Liters (ltr)</option>
+        <option value="ml">Milliliters (ml)</option>
+      </select>
+    </div>
+
+    <!-- Waste Source -->
+    <div>
+      <label for="source" class="block text-gray-700 font-medium">Source</label>
+      <select id="source" name="source" required class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-300">
+        <option value="">-- Select Source --</option>
+        <option value="Kitchen">Kitchen</option>
+        <option value="Manufacturing">Manufacturing</option>
+        <option value="Office">Office</option>
+        <option value="Retail">Retail</option>
+        <option value="Construction">Construction</option>
+      </select>
+    </div>
+
+    <!-- Date of Waste Generation -->
+    <div>
+      <label for="waste_date" class="block text-gray-700 font-medium">Date of Waste Generation</label>
+      <input type="date" id="waste_date" name="waste_date" required class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-300">
+    </div>
+
+    <!-- Reason for Waste -->
+    <div>
+      <label for="reason" class="block text-gray-700 font-medium">Reason for Waste</label>
+      <textarea id="reason" name="reason" rows="3" class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-300" placeholder="Explain the reason for waste (optional)"></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 mt-4 rounded-lg hover:bg-blue-700 transition">
+      Submit Waste Entry
+    </button>
+  </form>
+</div>
+
+{% endblock %}

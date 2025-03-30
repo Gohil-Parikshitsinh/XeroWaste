@@ -1,0 +1,90 @@
+{% extends "applayout.html" %}
+{% block title %}Waste Tracking | XeroWaste{% endblock %}
+{% block content %}
+
+<div class="max-w-6xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg">
+  <!-- Page Title -->
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-bold text-gray-800">Waste Tracking</h2>
+    <a href="/add-waste" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+      + Add Waste Entry
+    </a>
+  </div>
+
+  <!-- Filters Section -->
+  <div class="bg-gray-100 p-4 rounded-lg mb-4">
+    <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <!-- Date Filter -->
+      <div>
+        <label for="date" class="block text-gray-700 font-medium">Date</label>
+        <input type="date" id="date" name="date" class="w-full p-2 border rounded-lg">
+      </div>
+
+      <!-- Waste Type Filter -->
+      <div>
+        <label for="waste_type" class="block text-gray-700 font-medium">Waste Type</label>
+        <select id="waste_type" name="waste_type" class="w-full p-2 border rounded-lg">
+          <option value="">All Types</option>
+          <option value="Plastic">Plastic</option>
+          <option value="Organic">Organic</option>
+          <option value="Metal">Metal</option>
+        </select>
+      </div>
+
+      <!-- Source Filter -->
+      <div>
+        <label for="source" class="block text-gray-700 font-medium">Source</label>
+        <select id="source" name="source" class="w-full p-2 border rounded-lg">
+          <option value="">All Sources</option>
+          <option value="Kitchen">Kitchen</option>
+          <option value="Manufacturing">Manufacturing</option>
+        </select>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex items-end">
+        <button type="submit" class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+          Apply Filters
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Waste Tracking Table -->
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse bg-white text-left text-sm text-gray-600">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="px-4 py-2">#</th>
+          <th class="px-4 py-2">Date</th>
+          <th class="px-4 py-2">Waste Type</th>
+          <th class="px-4 py-2">Quantity</th>
+          <th class="px-4 py-2">Unit</th>
+          <th class="px-4 py-2">Source</th>
+          <th class="px-4 py-2">Reason</th>
+          <th class="px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for waste in waste_entries %}
+        <tr class="border-b hover:bg-gray-100">
+          <td class="px-4 py-2">{{ loop.index }}</td>
+          <td class="px-4 py-2">{{ waste.waste_date }}</td>
+          <td class="px-4 py-2">{{ waste.waste_type }}</td>
+          <td class="px-4 py-2">{{ waste.quantity }}</td>
+          <td class="px-4 py-2">{{ waste.unit }}</td>
+          <td class="px-4 py-2">{{ waste.source }}</td>
+          <td class="px-4 py-2">{{ waste.reason }}</td>
+          <td class="px-4 py-2">
+            <a href="/edit-waste/{{ waste.id }}" class="text-blue-500 hover:underline">Edit</a>
+            |
+            <a href="/delete-waste/{{ waste.id }}" class="text-red-500 hover:underline">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
