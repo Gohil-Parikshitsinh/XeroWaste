@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
 import { Camera } from './components/Camera';
 import { InventoryList } from './components/InventoryList';
+import { InventoryStats } from './components/InventoryStats';
 import { ScanBarcode } from 'lucide-react';
 import type { InventoryItem } from './types';
+
+const calculateStats = (items: InventoryItem[]) => {
+  return {
+    totalItems: items.reduce((sum, item) => sum + item.quantity, 0),
+    freshItems: items.filter(item => item.status === 'fresh')
+      .reduce((sum, item) => sum + item.quantity, 0),
+    expiringSoonItems: items.filter(item => item.status === 'expiring-soon')
+      .reduce((sum, item) => sum + item.quantity, 0),
+    expiredItems: items.filter(item => item.status === 'expired')
+      .reduce((sum, item) => sum + item.quantity, 0),
+  };
+};
 
 // Simulated detection results for demo purposes
 const mockDetection = async (imageSrc: string): Promise<InventoryItem[]> => {
@@ -37,6 +50,7 @@ const mockDetection = async (imageSrc: string): Promise<InventoryItem[]> => {
 function App() {
   const [items, setItems] = useState<InventoryItem[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const stats = calculateStats(items);
 
   const handleCapture = async (imageSrc: string) => {
     setIsProcessing(true);
@@ -64,12 +78,15 @@ function App() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-2">
-          <div>
-            <Camera onCapture={handleCapture} isProcessing={isProcessing} />
-          </div>
-          <div>
-            <InventoryList items={items} />
+        <div className="space-y-8">
+          <InventoryStats stats={stats} />
+          <div className="grid gap-8 md:grid-cols-2">
+            <div>
+              <Camera onCapture={handleCapture} isProcessing={isProcessing} />
+            </div>
+            <div>
+              <InventoryList items={items} />
+            </div>
           </div>
         </div>
       </main>
