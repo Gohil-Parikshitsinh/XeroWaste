@@ -1,9 +1,3 @@
-# import os
-# import google.generativeai as genai
-#
-# # Configure API key
-# genai.configure(api_key=os.getenv("AIzaSyAd3YbRi038N55z7uJXaGBV5ulL2BmNiQk"))
-
 import os
 from dotenv import load_dotenv
 import google.generativeai as genai
@@ -28,19 +22,19 @@ model = genai.GenerativeModel("gemini-1.5-pro-latest")
 def get_recipe_recommendations(ingredients):
     prompt = f"""
     You are an AI-powered food recommendation assistant.
-    Suggest *Indian recipes* based on the given ingredients.
+    Suggest **Indian recipes** based on the given ingredients.
     If no exact match is found, suggest alternatives with similar ingredients.
 
-    *Ingredients provided:* {', '.join(ingredients)}
+    **Ingredients provided:** {', '.join(ingredients)}
 
     Provide:
-    - *Recipe Name*
-    - *Brief Description*
-    - *Preparation Time*
-    - *Cooking Time*
-    - *Serving Size*
-    - *Key Ingredients* (highlighting provided ones)
-    - *Cooking Instructions* (step-by-step)
+    - **Recipe Name**
+    - **Brief Description**
+    - **Preparation Time**
+    - **Cooking Time**
+    - **Serving Size**
+    - **Key Ingredients** (highlighting provided ones)
+    - **Cooking Instructions** (step-by-step)
 
     Keep the response structured and user-friendly.
     """
@@ -50,7 +44,7 @@ def get_recipe_recommendations(ingredients):
 
 
 # Example usage
-if __name__ == "_main_":
+if __name__ == "__main__":
     user_ingredients = input(
         "Enter your available ingredients (comma-separated): "
     ).split(",")

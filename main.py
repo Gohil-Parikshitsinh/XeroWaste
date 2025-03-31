@@ -1,10 +1,25 @@
+import requests
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
+import os
+import sys
+import google.generativeai as genai
+from dotenv import load_dotenv
 from sqlalchemy import text
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../frontend/zero")))
+from flask import Flask, render_template, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
 
+from flask import Flask, render_template, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_socketio import SocketIO, emit
+import requests  # For API calls
+import eventlet  # For real-time WebSockets
 app = Flask(__name__)
+
+socketio = SocketIO(app, cors_allowed_origins="*")
+eventlet.monkey_patch()
 
 # ✅ Use SQLAlchemy MySQL Connection (XAMPP on port 4306)
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:@localhost:4306/xerowaste"
@@ -12,7 +27,10 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = "your_secret_key"
 
 db = SQLAlchemy(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
+genai.configure(api_key="AIzaSyAd3YbRi038N55z7uJXaGBV5ulL2BmNiQk")
+model = genai.GenerativeModel("gemini-1.5-pro-latest")
 
 # ✅ Models
 class Product(db.Model):
@@ -414,6 +432,21 @@ def generate_bill(table_id):
     return render_template("bill.html", orders=orders, total_price=total_price, table=table)
 
 
+@app.route("/chatbot", methods=["GET", "POST"])
+def chatbot():
+    bot_response = ""
+
+    if request.method == "POST":
+        user_input = request.form.get("user_input", "").strip()
+
+        if user_input:
+            try:
+                response = model.generate_content(f"Tell me about {user_input}")
+                bot_response = response.text.strip()
+            except Exception as e:
+                bot_response = "Sorry, I couldn't fetch the details."
+
+    return render_template("chatbot.html", bot_response=bot_response)
 
 if __name__ == '__main__':
     app.run(debug=True)
