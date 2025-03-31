@@ -5,15 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}XeroWaste - Dashboard{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        function toggleSidebar() {
-            document.getElementById("sidebar").classList.toggle("-translate-x-full");
-        }
-
-        function togglePlugins() {
-            document.getElementById("pluginsDropdown").classList.toggle("hidden");
-        }
-    </script>
+    
 </head>
 <body class="bg-gray-100">
 
@@ -66,6 +58,14 @@
         </div>
     </div>
     
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("-translate-x-full");
+        }
 
+        function togglePlugins() {
+            document.getElementById("pluginsDropdown").classList.toggle("hidden");
+        }
+    </script>
 </body>
 </html>
