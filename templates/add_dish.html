@@ -1,0 +1,28 @@
+{% extends "applayout.html" %}
+{% block title %}Add Dish - XeroWaste{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-5">
+    <h1 class="text-3xl font-bold mb-4">Add a New Dish</h1>
+    
+    <form method="POST">
+        <label>Name:</label>
+        <input type="text" name="name" required class="border p-2 w-full rounded mb-2">
+
+        <label>Price:</label>
+        <input type="number" name="price" step="0.01" required class="border p-2 w-full rounded mb-2">
+
+        <h3 class="font-semibold mt-2">Ingredients:</h3>
+        {% for ingredient in ingredients %}
+        <div class="flex items-center space-x-2">
+            <input type="checkbox" name="ingredient_ids" value="{{ ingredient.id }}">
+            <span>{{ ingredient.name }}</span>
+            <input type="number" name="quantities" placeholder="Qty" class="border p-1 rounded w-16">
+            <input type="text" name="units" placeholder="Unit" class="border p-1 rounded w-16">
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded mt-3">Add Dish</button>
+    </form>
+</div>
+{% endblock %}

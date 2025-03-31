@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -9,6 +9,7 @@ app = Flask(__name__)
 # ✅ Use SQLAlchemy MySQL Connection (XAMPP on port 4306)
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:@localhost:4306/xerowaste"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SECRET_KEY"] = "your_secret_key"
 
 db = SQLAlchemy(app)
 
@@ -47,6 +48,43 @@ class WasteEntry(db.Model):
 
     def __repr__(self):
         return f"<WasteEntry {self.waste_type}, {self.quantity} {self.unit}>"
+
+
+class Dishes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    price = db.Column(db.Numeric(10, 2), nullable=False)
+    image_url = db.Column(db.String(255), nullable=True)
+
+
+# ✅ Ingredient Model
+class Ingredient(db.Model):
+    __tablename__ = "ingredients"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    stock = db.Column(db.Integer, nullable=False, default=0)
+    unit = db.Column(db.String(50), nullable=False)
+
+# ✅ Dish-Ingredient Mapping Model
+class DishIngredient(db.Model):
+    __tablename__ = "dish_ingredients"
+    id = db.Column(db.Integer, primary_key=True)
+    dish_id = db.Column(db.Integer, db.ForeignKey("dishes.id"), nullable=False)
+    ingredient_id = db.Column(db.Integer, db.ForeignKey("ingredients.id"), nullable=False)
+    quantity_used = db.Column(db.Integer, nullable=False)
+    unit = db.Column(db.String(50), nullable=False)
+
+
+class Orders(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    dish_id = db.Column(db.Integer, db.ForeignKey('dishes.id'), nullable=False)
+    table_id = db.Column(db.Integer, db.ForeignKey('tables.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    order_date = db.Column(db.DateTime, default=datetime.utcnow)
+    is_paid = db.Column(db.Boolean, default=False)
+
+class Tables(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
 
 
 
@@ -201,6 +239,142 @@ def waste_analysis():
     print("Final Waste Breakdown:", waste_data)  # Debugging
 
     return render_template("waste_analysis.html", waste_breakdown=waste_data)
+
+
+
+
+
+
+
+
+@app.route("/menu")
+def menu():
+    dishes = db.session.execute(
+        text("SELECT id, name, price, image_url FROM dishes")  # ✅ Add image_url
+    ).fetchall()
+
+    ingredients = db.session.execute(
+        text("""
+            SELECT dish_ingredients.dish_id, ingredients.name, dish_ingredients.quantity_used, ingredients.unit
+            FROM dish_ingredients
+            JOIN ingredients ON dish_ingredients.ingredient_id = ingredients.id
+        """)
+    ).fetchall()
+
+    # Organize ingredients by dish_id
+    dish_ingredient_map = {}
+    for row in ingredients:
+        dish_id, name, quantity_used, unit = row
+        if dish_id not in dish_ingredient_map:
+            dish_ingredient_map[dish_id] = []
+        dish_ingredient_map[dish_id].append((name, quantity_used, unit))
+
+    return render_template("menu.html", dishes=dishes, dish_ingredient_map=dish_ingredient_map)
+
+# ✅ Add New Dish
+@app.route("/add_dish", methods=["POST"])
+def add_dish():
+    name = request.form.get("name")
+    price = request.form.get("price")
+
+    if name and price:
+        new_dish = Dishes(name=name, price=price)
+        db.session.add(new_dish)
+        db.session.commit()
+        flash("Dish added successfully!", "success")
+    else:
+        flash("Failed to add dish. Please provide all details.", "danger")
+
+    return redirect(url_for("menu"))
+
+@app.route("/sell_dish", methods=["POST"])
+def sell_dish():
+    dish_id = request.form.get("dish_id")
+    table_id = request.form.get("table_id")  # New: Assign order to a table
+    quantity = int(request.form.get("quantity", 1))
+
+    dish_ingredients = DishIngredient.query.filter_by(dish_id=dish_id).all()
+
+    for dish_ingredient in dish_ingredients:
+        ingredient = Ingredient.query.get(dish_ingredient.ingredient_id)
+
+        if ingredient.stock < dish_ingredient.quantity_used * quantity:
+            flash(f"Not enough {ingredient.name} in stock!", "danger")
+            return redirect(url_for("menu"))
+
+    # If all ingredients are available, deduct stock
+    for dish_ingredient in dish_ingredients:
+        ingredient = Ingredient.query.get(dish_ingredient.ingredient_id)
+        ingredient.stock -= dish_ingredient.quantity_used * quantity
+
+    # Save Order Record with table_id
+    new_order = Orders(dish_id=dish_id, table_id=table_id, quantity=quantity)
+    db.session.add(new_order)
+
+    # Mark table as occupied
+    table = Tables.query.get(table_id)
+    if table:
+        table.status = "Occupied"
+
+    db.session.commit()
+    flash("Dish sold successfully!", "success")
+
+    return redirect(url_for("menu"))
+
+
+@app.route('/order', methods=['POST'])
+def place_order():
+    table_id = request.form.get('table_id')
+    dish_id = request.form.get('dish_id')
+    quantity = request.form.get('quantity')
+
+    new_order = Orders(table_id=table_id, dish_id=dish_id, quantity=quantity)
+    db.session.add(new_order)
+
+    # Mark table as "Occupied"
+    table = Tables.query.get(table_id)
+    if table:
+        table.status = "Occupied"
+
+    db.session.commit()
+    return redirect(url_for('menu'))
+
+@app.route('/table/<int:table_id>/orders')
+def table_orders(table_id):
+    table = Tables.query.get_or_404(table_id)
+
+    orders = db.session.execute(
+        text("""
+            SELECT orders.id, dishes.name, orders.quantity, orders.order_date
+            FROM orders
+            JOIN dishes ON orders.dish_id = dishes.id
+            WHERE orders.table_id = :table_id
+        """),
+        {"table_id": table_id}
+    ).fetchall()
+
+    return render_template('table_orders.html', table=table, orders=orders)
+
+
+@app.route("/bill/<int:table_id>")
+def generate_bill(table_id):
+    table = Tables.query.get_or_404(table_id)
+
+    orders = db.session.execute(
+        text("""
+            SELECT orders.id, dishes.name, dishes.price, orders.quantity
+            FROM orders
+            JOIN dishes ON orders.dish_id = dishes.id
+            WHERE orders.table_id = :table_id
+        """),
+        {"table_id": table_id}
+    ).fetchall()
+
+    total_price = sum(order[2] * order[3] for order in orders)  # order[2] = price, order[3] = quantity
+
+    return render_template("bill.html", orders=orders, total_price=total_price, table=table)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

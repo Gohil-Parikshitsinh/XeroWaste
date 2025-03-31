@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - XeroWaste</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Navigation -->
+  <nav class="bg-white border-b py-4 px-6">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="flex items-center">
+        <a href="index.html">
+          <h1 class="text-2xl font-bold text-green-600">XeroWaste</h1>
+        </a>
+      </div>
+      <div class="hidden md:flex space-x-6">
+        <a href="index.html" class="text-gray-700 hover:text-green-600 font-medium">Home</a>
+        <a href="about.html" class="text-gray-700 hover:text-green-600 font-medium">About</a>
+        <a href="features.html" class="text-gray-700 hover:text-green-600 font-medium">Features</a>
+        <a href="team.html" class="text-gray-700 hover:text-green-600 font-medium">Team</a>
+      </div>
+      <div>
+        <a href="login.html">
+          <button class="border border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mr-2">Log in</button>
+        </a>
+        <a href="signup.html">
+          <button class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2">Sign up</button>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- About Hero Section -->
+  <section class="bg-gradient-to-b from-white to-green-50 py-16 md:py-24">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10 md:mb-0">
+          <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">About XeroWaste</h1>
+          <p class="text-lg text-gray-600 mb-6">
+            XeroWaste is an AI-powered Smart Kitchen & Waste Minimizer system designed for restaurants. Our hackathon project aims to revolutionize how restaurants manage inventory, reduce food waste, and increase profitability through cutting-edge technology.
+          </p>
+          <p class="text-lg text-gray-600 mb-6">
+            Our system uses computer vision, machine learning, and advanced analytics to automate inventory tracking, predict food spoilage, optimize menus, and deliver actionable insights.
+          </p>
+        </div>
+        <div class="md:w-1/2 md:pl-10">
+          <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-bold mb-4 text-green-600">Dashboard Features:</h3>
+            <ul class="list-disc list-inside space-y-2">
+              <li>Comprehensive inventory management system</li>
+              <li>Detailed waste tracking and categorization</li>
+              <li>Real-time stock monitoring with expiry date alerts</li>
+              <li>Data visualization and reporting tools</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6">Our Mission</h2>
+        <p class="text-xl text-gray-600">
+          We're on a mission to reduce food waste in the restaurant industry through innovative AI technology. By helping restaurants optimize their operations, we aim to create a more sustainable and profitable food service ecosystem.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-gray-800">Meet Our Team</h2>
+        <p class="mt-4 text-xl text-gray-600">The students behind the XeroWaste project</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto" id="team-members">
+        <!-- Team members will be populated here by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Preview Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Dashboard Preview</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-4">Main Dashboard</h3>
+            <p class="text-gray-700 mb-4">
+              Our main dashboard provides a complete overview of your restaurant's inventory status, including:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+              <li>Total product count (16 in the example)</li>
+              <li>Current stock levels across all categories</li>
+              <li>Expired items alert (6 items in the example)</li>
+              <li>Total waste monitoring</li>
+              <li>Recent inventory additions with expiry tracking</li>
+            </ul>
+          </div>
+          
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-4">Inventory Management</h3>
+            <p class="text-gray-700 mb-4">
+              The inventory management screen shows:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+              <li>Product details organized by categories</li>
+              <li>Current stock quantities for each product</li>
+              <li>Expiry dates with visual indicators</li>
+              <li>Price tracking over the last 15 days</li>
+              <li>Quick actions for editing or deleting items</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="mt-8">
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-4">Waste Tracking</h3>
+            <p class="text-gray-700 mb-4">
+              Our waste tracking system enables:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+              <li>Detailed waste categorization (Plastic, Metal, etc.)</li>
+              <li>Date-based filtering and organization</li>
+              <li>Source tracking to identify problem areas</li>
+              <li>Quantity measurement in appropriate units</li>
+              <li>Easy addition of new waste entries</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="mt-8 bg-green-50 p-6 rounded-lg border border-green-200">
+          <h3 class="text-xl font-semibold mb-2 text-green-700">How to Access the Dashboard</h3>
+          <p class="text-gray-700">
+            You can access the dashboard by clicking on the "Log in" button in the navigation menu and entering your credentials. 
+            After logging in, you will be automatically redirected to the dashboard page where you can view all the features described above.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Background -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">Hackathon Project</h2>
+        
+        <div class="mb-8">
+          <h3 class="text-2xl font-semibold mb-4">Challenge Statement:</h3>
+          <p class="text-lg text-gray-700 mb-4">
+            "Create an AI-powered Smart Kitchen System for Restaurants that uses computer vision and machine learning to automate inventory tracking, predict food spoilage, and optimize operations to minimize waste and maximize efficiency."
+          </p>
+        </div>
+        
+        <div class="mb-8">
+          <h3 class="text-2xl font-semibold mb-4">Our Approach:</h3>
+          <ul class="list-disc list-inside space-y-3 text-lg text-gray-700">
+            <li>Computer Vision for Smart Inventory Management</li>
+            <li>AI-Powered Demand & Waste Prediction</li>
+            <li>Intelligent Menu Optimization</li>
+            <li>Vision-Powered Waste Analysis & Reporting</li>
+          </ul>
+        </div>
+        
+        <div class="mb-8">
+          <h3 class="text-2xl font-semibold mb-4">Technologies Used:</h3>
+          <ul class="list-disc list-inside space-y-3 text-lg text-gray-700">
+            <li>Frontend: React (Web)</li>
+            <li>Backend: Node.js (Express)</li>
+            <li>Database: PostgreSQL & MongoDB</li>
+            <li>AI/ML Frameworks: TensorFlow, PyTorch, OpenCV</li>
+            <li>Vision APIs: Google Vision, AWS Rekognition</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-12 mt-auto">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between">
+        <div class="mb-6 md:mb-0">
+          <h2 class="text-2xl font-bold text-white mb-4">XeroWaste</h2>
+          <p class="text-gray-400">AI-Powered Smart Kitchen & Waste Minimizer for Restaurants</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-white font-semibold mb-4">Product</h3>
+            <ul class="text-gray-400 space-y-2">
+              <li><a href="features.html" class="hover:text-white">Features</a></li>
+              <li><a href="pricing.html" class="hover:text-white">Pricing</a></li>
+              <li><a href="demo.html" class="hover:text-white">Request Demo</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-white font-semibold mb-4">Company</h3>
+            <ul class="text-gray-400 space-y-2">
+              <li><a href="about.html" class="hover:text-white">About Us</a></li>
+              <li><a href="team.html" class="hover:text-white">Team</a></li>
+              <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-white font-semibold mb-4">Legal</h3>
+            <ul class="text-gray-400 space-y-2">
+              <li><a href="privacy.html" class="hover:text-white">Privacy Policy</a></li>
+              <li><a href="terms.html" class="hover:text-white">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400 mb-4 md:mb-0">© 2024 XeroWaste. All rights reserved.</p>
+        <p class="text-gray-400">Powered by Zerodays</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="about.js"></script>
+</body>
+</html>
