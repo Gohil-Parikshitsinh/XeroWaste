@@ -1,0 +1,52 @@
+{% extends "appLayout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">📊 Reports Dashboard</h2>
+
+    <!-- ✅ Inventory Report -->
+    <div class="card mb-4">
+        <div class="card-header">📦 Inventory Report</div>
+        <div class="card-body">
+            <h5>Products</h5>
+            <ul>
+                {% for product in products %}
+                <li>{{ product.name }} - {{ product.stock }} units (Category: {{ product.category }})</li>
+                {% endfor %}
+            </ul>
+
+            <h5>Ingredients</h5>
+            <ul>
+                {% for ingredient in ingredients %}
+                <li>{{ ingredient.name }} - {{ ingredient.stock }} {{ ingredient.unit }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- ✅ Sales Report -->
+    <div class="card mb-4">
+        <div class="card-header">💰 Sales Report</div>
+        <div class="card-body">
+            <h5>Total Revenue: ₹{{ total_revenue }}</h5>
+            <ul>
+                {% for order in orders %}
+                <li>{{ order.dish.name }} (x{{ order.quantity }}) - Ordered on {{ order.order_date.strftime('%d-%m-%Y') }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- ✅ Waste Report -->
+    <div class="card mb-4">
+        <div class="card-header">🗑 Waste Report</div>
+        <div class="card-body">
+            <ul>
+                {% for waste in waste_entries %}
+                <li>{{ waste.waste_type }} - {{ waste.quantity }} {{ waste.unit }} (Reason: {{ waste.reason }})</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

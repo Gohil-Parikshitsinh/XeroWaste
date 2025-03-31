@@ -90,18 +90,57 @@ class Tables(db.Model):
 
 
 
+@app.route('/')
+def index():
+    return render_template("index.html")
+@app.route('/about')
+def about():
+    return render_template("about.html")
+@app.route('/demo')
+def demo():
+    return render_template("demo.html")
+@app.route('/features')
+def features():
+    return render_template("features.html")
+@app.route('/login')
+def login():
+    return render_template("login.html")
 
+@app.route('/pricing')
+def pricing():
+    return render_template("pricing.html")
 
+@app.route('/privacy')
+def privacy():
+    return render_template("privacy.html")
 
-# ✅ Dashboard Route
+@app.route('/signup')
+def signup():
+    return render_template("signup.html")
+
+@app.route('/team')
+def team():
+    return render_template("team.html")
+
 @app.route('/dashboard')
 def dashboard():
+    # ✅ Get Total Products
     products_count = Product.query.count()
-    expired_items = Product.query.filter(Product.expiry_date < datetime.today()).count()
-    total_waste = ProductPurchase.query.count()  # This should be calculated properly
 
-    return render_template("dashboard.html", total_products=products_count, expired_items=expired_items,
-                           total_waste=total_waste)
+    # ✅ Get Expired Products
+    expired_products = Product.query.filter(Product.expiry_date < datetime.today()).all()
+    expired_items = len(expired_products)
+
+    # ✅ Total Waste Entries
+    total_waste = WasteEntry.query.count()  # Fixed waste calculation
+
+    return render_template(
+        "dashboard.html",
+        total_products=products_count,
+        expired_items=expired_items,
+        total_waste=total_waste,
+        expired_products=expired_products  # Send expired products to the template
+    )
 
 # ✅ Inventory Route
 @app.route('/inventory')

@@ -9,15 +9,19 @@
         function toggleSidebar() {
             document.getElementById("sidebar").classList.toggle("-translate-x-full");
         }
+
+        function togglePlugins() {
+            document.getElementById("pluginsDropdown").classList.toggle("hidden");
+        }
     </script>
 </head>
 <body class="bg-gray-100">
 
     <!-- ✅ Responsive Sidebar Layout -->
     <div class="flex h-screen">
-        <!-- ✅ Sidebar Navigation (Hidden on Mobile) -->
+        <!-- ✅ Sidebar Navigation -->
         <div id="sidebar" class="w-64 bg-blue-900 text-white p-5 fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
-            <h1 class="text-2xl font-bold mb-5 text-center">XeroWaste</h1>
+            <h1 class="text-2xl font-bold mb-5 text-center"><a href="/">XeroWaste</a></h1>
             <ul>
                 <li class="mb-3">
                     <a href="/dashboard" class="block py-2 px-4 rounded-lg hover:bg-blue-700">Dashboard</a>
@@ -31,9 +35,20 @@
                 <li class="mb-3">
                     <a href="/waste-analysis" class="block py-2 px-4 rounded-lg hover:bg-blue-700">Waste Analysis</a>
                 </li>
+                
+                <!-- ✅ Plugins Dropdown -->
                 <li class="mb-3">
-                    <a href="/reports" class="block py-2 px-4 rounded-lg hover:bg-blue-700">Reports</a>
+                    <button onclick="togglePlugins()" class="w-full text-left py-2 px-4 rounded-lg hover:bg-blue-700 flex justify-between items-center">
+                        Plugins 
+                        <span>▾</span>
+                    </button>
+                    <ul id="pluginsDropdown" class="hidden bg-blue-800 rounded-lg mt-2">
+                        <li>
+                            <a href="/menu" class="block py-2 px-6 rounded-lg hover:bg-blue-700">Restaurant Plugin</a>
+                        </li>
+                    </ul>
                 </li>
+
             </ul>
         </div>
 
@@ -47,6 +62,7 @@
             {% block content %}{% endblock %}
         </div>
     </div>
+    
 
 </body>
 </html>

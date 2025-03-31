@@ -1,36 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - XeroWaste</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="min-h-screen bg-gray-50 flex flex-col">
-  <!-- Navigation -->
-  <nav class="bg-white border-b py-4 px-6">
-    <div class="container mx-auto flex justify-between items-center">
-      <div class="flex items-center">
-        <a href="index.html">
-          <h1 class="text-2xl font-bold text-green-600">XeroWaste</h1>
-        </a>
-      </div>
-      <div class="hidden md:flex space-x-6">
-        <a href="index.html" class="text-gray-700 hover:text-green-600 font-medium">Home</a>
-        <a href="about.html" class="text-gray-700 hover:text-green-600 font-medium">About</a>
-        <a href="features.html" class="text-gray-700 hover:text-green-600 font-medium">Features</a>
-        <a href="team.html" class="text-gray-700 hover:text-green-600 font-medium">Team</a>
-      </div>
-      <div>
-        <a href="login.html">
-          <button class="border border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mr-2">Log in</button>
-        </a>
-        <a href="signup.html">
-          <button class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2">Sign up</button>
-        </a>
-      </div>
-    </div>
-  </nav>
+{% extends "mainlayout.html" %}
+{% block title %}Add Dish - XeroWaste{% endblock %}
+
+{% block content %}
 
   <!-- Login Form -->
   <div class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -39,7 +10,7 @@
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
         <p class="mt-2 text-center text-sm text-gray-600">
           Or
-          <a href="signup.html" class="font-medium text-green-600 hover:text-green-500">
+          <a href="signup.html" class="font-medium text-blue-600 hover:text-green-500">
             create a new account
           </a>
         </p>
@@ -65,14 +36,14 @@
           </div>
 
           <div class="text-sm">
-            <a href="#" class="font-medium text-green-600 hover:text-green-500">
+            <a href="#" class="font-medium text-blue-600 hover:text-green-500">
               Forgot your password?
             </a>
           </div>
         </div>
 
         <div>
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
             Sign in
           </button>
         </div>
@@ -80,14 +51,4 @@
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 py-6">
-    <div class="container mx-auto px-6">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <p class="text-gray-400 mb-4 md:mb-0">© 2024 XeroWaste. All rights reserved.</p>
-        <p class="text-gray-400">Powered by Zerodays</p>
-      </div>
-    </div>
-  </footer>
-</body>
-</html>
+{% endblock %}

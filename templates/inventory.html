@@ -19,7 +19,7 @@
                     <th class="border p-2">Category</th>
                     <th class="border p-2">Stock</th>
                     <th class="border p-2">Expiry Date</th>
-                    <th class="border p-2">Avg Price (Last 15 Days)</th>
+                    <!-- <th class="border p-2">Avg Price (Last 15 Days)</th> -->
                     <th class="border p-2">Actions</th>
                 </tr>
             </thead>
@@ -30,7 +30,7 @@
                     <td class="border p-2">{{ product.category }}</td>
                     <td class="border p-2">{{ product.stock }}</td>
                     <td class="border p-2">{{ product.expiry_date }}</td>
-                    <td class="border p-2">₹{{ product.average_price }}</td>
+                    <!-- <td class="border p-2">₹{{ product.average_price }}</td> -->
                     <td class="border p-2">
                         <a href="/edit-product/{{ product.id }}" class="text-blue-500">Edit</a>
                         <form method="POST" action="/delete-product/{{ product.id }}" class="inline">

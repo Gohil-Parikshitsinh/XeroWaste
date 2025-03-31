@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XeroWaste - AI-Powered Smart Kitchen & Waste Minimizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+
+</head>
+
+<body class="min-h-screen flex flex-col">
+  <!-- Navigation -->
+  <nav class="bg-white border-b py-4 px-6">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="flex items-center">
+        <a href="/">
+          <h1 class="text-2xl font-bold text-blue-600">XeroWaste</h1>
+        </a>
+      </div>
+      <div class="hidden md:flex space-x-6">
+        <a href="/" class="text-gray-700 hover:text-green-600 font-medium">Home</a>
+        <a href="/about" class="text-gray-700 hover:text-green-600 font-medium">About</a>
+        <a href="/features" class="text-gray-700 hover:text-green-600 font-medium">Features</a>
+        <a href="/team" class="text-gray-700 hover:text-green-600 font-medium">Team</a>
+      </div>
+      <div>
+        <a href="/dashboard">
+          <button
+            class="border border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 mr-2">Log
+            in</button>
+        </a>
+        <a href="/signup">
+          <button
+            class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2">Sign
+            up</button>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-6">
+        {% block content %}{% endblock %}
+    </div>
+
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 py-12 mt-auto">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between">
+        <div class="mb-6 md:mb-0">
+          <h2 class="text-2xl font-bold text-white mb-4">XeroWaste</h2>
+          <p class="text-gray-400">AI-Powered Smart Kitchen & Waste Minimizer for Restaurants</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-white font-semibold mb-4">Product</h3>
+            <ul class="text-gray-400 space-y-2">
+              <li><a href="/features" class="hover:text-white">Features</a></li>
+              <li><a href="/pricing" class="hover:text-white">Pricing</a></li>
+              <li><a href="/demo" class="hover:text-white">Request Demo</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-white font-semibold mb-4">Company</h3>
+            <ul class="text-gray-400 space-y-2">
+              <li><a href="/about" class="hover:text-white">About Us</a></li>
+              <li><a href="/team" class="hover:text-white">Team</a></li>
+              <li><a href="/contact" class="hover:text-white">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-white font-semibold mb-4">Legal</h3>
+            <ul class="text-gray-400 space-y-2">
+              <li><a href="/privacy" class="hover:text-white">Privacy Policy</a></li>
+              <li><a href="/terms" class="hover:text-white">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400 mb-4 md:mb-0">© 2024 XeroWaste. All rights reserved.</p>
+        <p class="text-gray-400">Powered by Zerodays</p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

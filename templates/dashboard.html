@@ -6,45 +6,55 @@
     <h2 class="text-3xl font-semibold mb-4">Dashboard</h2>
 
     <!-- ✅ Stats Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
+        <!-- 📌 Total Products -->
         <div class="bg-white p-4 shadow rounded-lg">
-            <h3 class="text-lg font-semibold">Total Products</h3>
-            <p class="text-2xl font-bold">{{ total_products }}</p>
+            <h3 class="text-lg font-semibold text-gray-700">Total Products</h3>
+            <p class="text-2xl font-bold text-indigo-600">{{ total_products }}</p>
         </div>
+
+        <!-- 📌 Expired Items -->
         <div class="bg-white p-4 shadow rounded-lg">
-            <h3 class="text-lg font-semibold">Stock Level</h3>
-            <p class="text-2xl font-bold">{{ stock_level }}</p>
-        </div>
-        <div class="bg-white p-4 shadow rounded-lg">
-            <h3 class="text-lg font-semibold">Expired Items</h3>
+            <h3 class="text-lg font-semibold text-gray-700">Expired Items</h3>
             <p class="text-2xl font-bold text-red-600">{{ expired_items }}</p>
         </div>
+
+        <!-- 📌 Total Waste -->
         <div class="bg-white p-4 shadow rounded-lg">
-            <h3 class="text-lg font-semibold">Total Waste</h3>
-            <p class="text-2xl font-bold">{{ total_waste }}</p>
+            <h3 class="text-lg font-semibold text-gray-700">Total Waste Entries</h3>
+            <p class="text-2xl font-bold text-orange-500">{{ total_waste }}</p>
         </div>
     </div>
 
-    <!-- ✅ Recent Inventory Table -->
+    <!-- ✅ Expired Items Table -->
     <div class="bg-white p-6 shadow rounded-lg">
-        <h3 class="text-xl font-semibold mb-4">Recent Inventory</h3>
+        <h3 class="text-xl font-semibold mb-4">Expired Products</h3>
         <table class="w-full border-collapse border border-gray-200">
             <thead>
-                <tr class="bg-gray-100">
+                <tr class="bg-gray-100 text-left">
                     <th class="border p-2">Product Name</th>
-                    <th class="border p-2">Quantity</th>
+                    <th class="border p-2">Category</th>
+                    <th class="border p-2">Stock</th>
                     <th class="border p-2">Expiry Date</th>
                 </tr>
             </thead>
             <tbody>
-                {% for item in recent_inventory %}
+                {% for product in expired_products %}
                 <tr class="text-center">
-                    <td class="border p-2">{{ item.name }}</td>
-                    <td class="border p-2">{{ item.quantity }}</td>
-                    <td class="border p-2">{{ item.expiry_date }}</td>
+                    <td class="border p-2">{{ product.name }}</td>
+                    <td class="border p-2">{{ product.category }}</td>
+                    <td class="border p-2">{{ product.stock }}</td>
+                    <td class="border p-2 text-red-500">
+                        {{ product.expiry_date.strftime('%Y-%m-%d') }}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" class="border p-2 text-center text-gray-500">No expired products found.</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+
 {% endblock %}
